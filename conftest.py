@@ -1,10 +1,10 @@
 import pytest
 
 from applications.api.github_api import GitHubAPI
-from applications.api.wizzard_world_api import WizzardWorldApi
+from applications.api.final_space_api import FinalSpaceApi
 from applications.ui.github_ui import GitHubUI
-from config.config import GitHubConfig
-from config.config import WizzardWorldConfig
+from config.config import FinalSpaceConfig, GitHubConfig
+from config.config import FinalSpaceConfig
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 
@@ -30,3 +30,12 @@ def github_ui_client():
     yield github_ui_client
 
     github_ui_client.close_browser()
+
+
+@pytest.fixture(scope="session")
+def final_space_api_client():
+    final_space_api_client = FinalSpaceApi(FinalSpaceConfig.BASE_URL)
+
+    yield final_space_api_client
+
+    print("END-UP TEST")
